@@ -18,6 +18,7 @@ If you're intersted in a paid subscription with GitPod use the coupon code: **TE
 # 오픈소스 프로그래밍
 repository URL: https://github.com/techwithtim/Snake-Game
 
-### 기본 조작법
+### 기존 플레이
 - 방향키 →, ←, ↑, ↓ 로 붉은 점(뱀)을 움직여 초록 점(먹이)를 먹어 뱀의 길이를 늘림
 - 뱀이 자신의 몸 또는 벽에 닿을 시 최종 점수를 보여주며 게임이 끝남
+- 최종 점수는 뱀이 먹이를 먹어 늘어난 몸 길이
