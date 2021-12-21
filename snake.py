@@ -2,6 +2,7 @@ import math
 import random
 import pygame
 import random
+import sys
 import tkinter as tk
 from tkinter import messagebox
 
@@ -129,9 +130,14 @@ def redrawWindow():
     drawGrid(width, rows, win)
     s.draw(win)
     snack.draw(win)
-    pygame.display.update()
-    pass
-
+    # 스코어 및 게임오버 추가
+    soreViewer()
+    if gameover == 1:
+        gameoverViewer()
+        pygame.display.update()
+        sleep(1)
+    else:
+        pygame.display.update()
 
 
 def drawGrid(w, rows, surface):
@@ -161,6 +167,19 @@ def randomSnack(rows, item):
 
     return (x,y)
 
+# 점수 출력
+def soreViewer():
+    WHITE = (255, 255, 0)
+    small_font = pygame.font.SysFont(None, 36)
+    soreView = small_font.render('Point {}'.format(score), True, WHITE)
+    win.blit(scoreView, (15, 15))
+    
+# 게임오버 출력
+def gameoverViewer():
+    RED = (255, 0, 0)
+    large_font = pygame.font.SysFont(None, 72)
+    gameoverView = large_font.render('GAME OVER', True, RED)
+    sin.blit(gameoverView, (width // 2 - gameoverView.get_width() // 2, height // 2 - gameoverView.get_height() // 2))
 
 def main():
     global s, snack, win
@@ -178,6 +197,7 @@ def main():
         headPos = s.head.pos
         if headPos[0] >= 20 or headPos[0] < 0 or headPos[1] >= 20 or headPos[1] < 0:
             print("Score:", len(s.body))
+            gameover = 1
             s.reset((10, 10))
 
         if s.body[0].pos == snack.pos:
@@ -187,6 +207,7 @@ def main():
         for x in range(len(s.body)):
             if s.body[x].pos in list(map(lambda z:z.pos,s.body[x+1:])):
                 print("Score:", len(s.body))
+                gameover = 1
                 s.reset((10,10))
                 break
                     
